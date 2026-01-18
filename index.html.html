@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hooked By GQ - Fishing YouTube Channel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ocean-deep: #0a2540;
+            --ocean-mid: #1e4976;
+            --ocean-light: #2d6a9f;
+            --wave-foam: #e8f4f8;
+            --sand: #d4b896;
+            --sunset: #ff6b35;
+            --coral: #ff8c61;
+            --seaweed: #2d5a3d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Merriweather', serif;
+            color: var(--ocean-deep);
+            background: var(--wave-foam);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 37, 64, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1.5rem 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        nav .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--wave-foam);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--sunset);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 3rem;
+        }
+
+        nav a {
+            color: var(--wave-foam);
+            text-decoration: none;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--sunset);
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::before,
+        nav a.active::before {
+            width: 100%;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: var(--sunset);
+        }
+
+        /* Page Sections */
+        section {
+            min-height: 100vh;
+            padding: 120px 2rem 80px;
+            display: none;
+        }
+
+        section.active {
+            display: block;
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            background: 
+                linear-gradient(135deg, rgba(10, 37, 64, 0.85) 0%, rgba(30, 73, 118, 0.75) 50%, rgba(45, 106, 159, 0.85) 100%),
+                url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1600') center/cover;
+            color: var(--wave-foam);
+            text-align: center;
+            padding: 180px 2rem 120px;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(45, 106, 159, 0.2) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 5.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            line-height: 1.1;
+            animation: slideDown 1s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero .tagline {
+            font-size: 1.6rem;
+            margin-bottom: 3rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            animation: slideDown 1s ease-out 0.2s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--sunset);
+            color: white;
+            padding: 1.2rem 3rem;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
+            animation: slideDown 1s ease-out 0.4s both;
+        }
+
+        .cta-button:hover {
+            background: var(--coral);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.6);
+        }
+
+        /* Wave Decoration */
+        .wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="%23e8f4f8"/></svg>') no-repeat;
+            background-size: cover;
+        }
+
+        /* Features Grid */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--sunset);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-card h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.8rem;
+            color: var(--ocean-deep);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .feature-card p {
+            color: var(--ocean-mid);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(135deg, var(--ocean-light), var(--ocean-mid));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Oswald', sans-serif;
+            font-size: 3rem;
+            color: white;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .about-text h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3.5rem;
+            color: var(--ocean-deep);
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+
+        .about-text p {
+            font-size: 1.15rem;
+            line-height: 2;
+            color: var(--ocean-mid);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Merch Section */
+        .merch-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, var(--ocean-light), var(--seaweed));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Oswald', sans-serif;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .product-info {
+            padding: 2rem;
+        }
+
+        .product-info h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.8rem;
+            color: var(--ocean-deep);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            color: var(--sunset);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .product-info p {
+            color: var(--ocean-mid);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .buy-button {
+            display: inline-block;
+            background: var(--ocean-deep);
+            color: white;
+            padding: 0.8rem 2rem;
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .buy-button:hover {
+            background: var(--sunset);
+            transform: translateX(5px);
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 4rem;
+            color: var(--ocean-deep);
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--sunset);
+        }
+
+        .section-header p {
+            font-size: 1.3rem;
+            color: var(--ocean-mid);
+            margin-top: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--ocean-deep);
+            color: var(--wave-foam);
+            padding: 4rem 2rem 2rem;
+            position: relative;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--sunset);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: var(--wave-foam);
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--sunset);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: var(--ocean-mid);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--sunset);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--ocean-mid);
+            color: var(--wave-foam);
+            opacity: 0.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 1.5rem;
+            }
+
+            nav a {
+                font-size: 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+                letter-spacing: 4px;
+            }
+
+            .hero .tagline {
+                font-size: 1.2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header h2 {
+                font-size: 2.5rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">Hooked By GQ</div>
+            <ul>
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About Us</a></li>
+                <li><a href="#merch" class="nav-link">Merch</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="active">
+        <div class="hero">
+            <div class="hero-content">
+                <h1>Hooked By GQ</h1>
+                <p class="tagline">Real Fishing. Real Fun. Real Friends.</p>
+                <a href="https://www.youtube.com/@HookedByGQ" target="_blank" class="cta-button">Watch on YouTube</a>
+            </div>
+            <div class="wave"></div>
+        </div>
+
+        <div class="container">
+            <div class="features">
+                <div class="feature-card">
+                    <h3>Fishing Adventures</h3>
+                    <p>Join Glenn and Quentin as they explore new waters, chase trophy catches, and share authentic fishing experiences that inspire anglers of all levels.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Tips & Techniques</h3>
+                    <p>Learn proven fishing methods, tackle setups, and local knowledge from two friends who live and breathe the sport. Educational content made entertaining.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Community & Fun</h3>
+                    <p>Hooked By GQ is more than just fishing—it's about building a community of anglers who share laughs, respect nature, and celebrate every catch together.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2>About Us</h2>
+                <p>Two Friends. One Passion. Countless Adventures.</p>
+            </div>
+            <div class="about-content">
+                <div class="about-image" style="background-image: url('https://images.unsplash.com/photo-1545450660-f1c0d66e0ce4?w=800'); background-size: cover; background-position: center;">
+                </div>
+                <div class="about-text">
+                    <h2>Meet Glenn & Quentin</h2>
+                    <p>Hooked By GQ was created by Glenn and Quentin, two friends brought together by a shared love for fishing and the outdoors. What started as casual fishing trips quickly turned into a passion for creating content and sharing real, exciting fishing experiences with others.</p>
+                    <p>On the <a href="https://www.youtube.com/@HookedByGQ" target="_blank" style="color: var(--sunset); text-decoration: underline; font-weight: 700;">Hooked By GQ YouTube channel</a>, Glenn and Quentin document their fishing adventures, from landing unforgettable catches to learning new techniques and enjoying time on the water. Their goal is to keep things real—showing both the wins and the challenges that come with fishing—while keeping the content entertaining and easy to enjoy.</p>
+                    <p>Hooked By GQ is all about having fun, respecting nature, and building a community of people who love fishing as much as they do. Whether you're an experienced angler or just getting started, the channel is a place to learn, laugh, and stay hooked.</p>
+                    <p style="margin-top: 2rem;"><em>Thanks for being part of the Hooked By GQ journey.</em></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Merch Section -->
+    <section id="merch">
+        <div class="container">
+            <div class="section-header">
+                <h2>Merch</h2>
+                <p>Rep the Hooked By GQ Brand</p>
+            </div>
+            <div class="merch-grid">
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600'); background-size: cover; background-position: center;"></div>
+                    <div class="product-info">
+                        <h3>GQ Logo Tee</h3>
+                        <div class="product-price">$24.99</div>
+                        <p>Classic cotton tee featuring the iconic Hooked By GQ logo. Perfect for your next fishing trip or casual wear.</p>
+                        <a href="#" class="buy-button">Coming Soon</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=600'); background-size: cover; background-position: center;"></div>
+                    <div class="product-info">
+                        <h3>Snapback Hat</h3>
+                        <div class="product-price">$27.99</div>
+                        <p>Stay cool on the water with our embroidered snapback. Adjustable fit and breathable mesh back.</p>
+                        <a href="#" class="buy-button">Coming Soon</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600'); background-size: cover; background-position: center;"></div>
+                    <div class="product-info">
+                        <h3>Performance Hoodie</h3>
+                        <div class="product-price">$49.99</div>
+                        <p>Premium hoodie for early mornings and late evenings. Moisture-wicking and built for comfort.</p>
+                        <a href="#" class="buy-button">Coming Soon</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600'); background-size: cover; background-position: center;"></div>
+                    <div class="product-info">
+                        <h3>Sticker Pack</h3>
+                        <div class="product-price">$8.99</div>
+                        <p>Waterproof vinyl stickers featuring GQ designs. Perfect for your tackle box, cooler, or truck.</p>
+                        <a href="#" class="buy-button">Coming Soon</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1622445275576-721325763afe?w=600'); background-size: cover; background-position: center;"></div>
+                    <div class="product-info">
+                        <h3>Long Sleeve UV Shirt</h3>
+                        <div class="product-price">$39.99</div>
+                        <p>Sun protection meets style. Lightweight, quick-dry fabric perfect for all-day fishing sessions.</p>
+                        <a href="#" class="buy-button">Coming Soon</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1534349762230-e0cadf78f5da?w=600'); background-size: cover; background-position: center;"></div>
+                    <div class="product-info">
+                        <h3>Insulated Tumbler</h3>
+                        <div class="product-price">$29.99</div>
+                        <p>Keep your drinks ice-cold for 24 hours. Durable stainless steel with the GQ logo.</p>
+                        <a href="#" class="buy-button">Coming Soon</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Hooked By GQ</h3>
+                <p>Join Glenn and Quentin on their fishing adventures. Subscribe to the YouTube channel for weekly content!</p>
+                <div class="social-links">
+                    <a href="https://www.youtube.com/@HookedByGQ" target="_blank" title="YouTube">YT</a>
+                    <a href="#" title="Instagram">IG</a>
+                    <a href="#" title="Facebook">FB</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#home">Home</a>
+                <a href="#about">About Us</a>
+                <a href="#merch">Merch</a>
+                <a href="https://www.youtube.com/@HookedByGQ" target="_blank">YouTube Channel</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: hookedby gq@gmail.com</p>
+                <p>For business inquiries and collaborations</p>
+            </div>
+            <div class="footer-section">
+                <h3>Stay Hooked</h3>
+                <p>New videos every week</p>
+                <p>Fishing tips, techniques, and adventures</p>
+                <p>Join the GQ fishing community</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Hooked By GQ. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth navigation
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('section');
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Remove active class from all links and sections
+                navLinks.forEach(l => l.classList.remove('active'));
+                sections.forEach(s => s.classList.remove('active'));
+                
+                // Add active class to clicked link
+                link.classList.add('active');
+                
+                // Show corresponding section
+                const targetId = link.getAttribute('href').substring(1);
+                document.getElementById(targetId).classList.add('active');
+                
+                // Scroll to top smoothly
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+
+        // CTA button - now goes to YouTube
+        const ctaButton = document.querySelector('.cta-button');
+        if (ctaButton && ctaButton.getAttribute('href') !== 'https://www.youtube.com/@HookedByGQ') {
+            // For internal merch links
+            ctaButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                navLinks.forEach(l => l.classList.remove('active'));
+                sections.forEach(s => s.classList.remove('active'));
+                
+                document.querySelector('[href="#merch"]').classList.add('active');
+                document.getElementById('merch').classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+    </script>
+</body>
+</html>
